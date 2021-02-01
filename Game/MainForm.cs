@@ -163,12 +163,6 @@ namespace VirtualTamer
                 batalha.ShowDialog();
             }
         }
-
-        private void tamaArea_Paint(object sender, PaintEventArgs e)
-        {
-            //Em breve será útil.
-        }
-
         private void btnPetTreinar_Click(object sender, EventArgs e)
         {
             petImagem.Location = new Point(141, 73);
