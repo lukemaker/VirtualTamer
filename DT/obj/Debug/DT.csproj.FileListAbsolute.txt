@@ -1,0 +1,11 @@
+C:\Users\Pichau\source\repos\DT\DT\bin\Debug\DT.exe.config
+C:\Users\Pichau\source\repos\DT\DT\bin\Debug\DT.exe
+C:\Users\Pichau\source\repos\DT\DT\bin\Debug\DT.pdb
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.csprojAssemblyReference.cache
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.MainForm.resources
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.Properties.Resources.resources
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.csproj.GenerateResource.cache
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.csproj.CoreCompileInputs.cache
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.exe
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.pdb
+C:\Users\Pichau\source\repos\DT\DT\obj\Debug\DT.DTCode.resources
