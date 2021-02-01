@@ -1,5 +1,5 @@
 # DT
-Remake do Projeto Digital Tamer em Fase BETA, cujo nome atual é Virtual Tamer.
+DT é o Remake do Projeto Digital Tamer em Fase BETA, cujo nome atual é Virtual Tamer.
 
 # Detalhes do Projeto
 A idéia do projeto é cuidar de um monstro virtual onde ele pode batalhar e até
