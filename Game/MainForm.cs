@@ -69,23 +69,10 @@ namespace VirtualTamer
                 }
             }
         }
-        private void btnSobre_Click(object sender, EventArgs e)
-        {
-        }
-
         private void btnSair_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-        private void btnDuvidas_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void btnConfig_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tempo_Tick(object sender, EventArgs e)
         {
             horario.Text = Convert.ToString(horaUm) + Convert.ToString(horaDois) + ":" + Convert.ToString(minuto) + Convert.ToString(segundo);
@@ -207,12 +194,6 @@ namespace VirtualTamer
                 treinamento.Stop();
             }
         }
-
-        private void btnSalvar_Click(object sender, EventArgs e)
-        {
-            //Em breve.
-        }
-
         MainForm novodt = new MainForm();
         private void btnNovoDT_Click(object sender, EventArgs e)
         {
@@ -226,11 +207,6 @@ namespace VirtualTamer
                 novodt.Show();
                 novodt.btnNovoDT.Enabled = false;
             }
-        }
-
-        private void btnPetAlimenta_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }
