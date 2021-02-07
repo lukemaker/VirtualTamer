@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
@@ -89,7 +89,7 @@ namespace DT
         private void move_Tick(object sender, EventArgs e)
         {
             petMove++;
-            if (petMove.Equals(130))
+            if (petMove.Equals(80))
             {
                 petImagem.Location = new Point(128, 59);
                 petMove = 0;
@@ -135,6 +135,24 @@ namespace DT
         {
             Opcoes opcoes = new Opcoes();
             opcoes.ShowDialog();
+        }
+
+        private void btnBatalhar_Click(object sender, EventArgs e)
+        {
+            BattleForm batalha = new BattleForm();
+            switch (Pet.Estagio)
+            {
+                case "Bebê":
+                    MessageBox.Show("Seu Pet não pode batalhar pois ele ainda é um bebê!", "Não foi possível continuar.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case "Criança":
+                    //Imagem apenas para teste.
+                    batalha.petImagem.Image = Properties.Resources.toko;
+                    batalha.petHP.Value = Pet.Vida;
+                    batalha.txtPet.Text = Pet.Nome;
+                    batalha.ShowDialog();
+                    break;
+            }
         }
     }
 }
