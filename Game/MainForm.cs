@@ -106,63 +106,6 @@ namespace VirtualTamer
                 }
             }
         }
-
-        private void periodos_Tick(object sender, EventArgs e)
-        {
-            if (horaUm == 1 && horaDois == 8)
-            {
-                periodo.Text = "Noite";
-            }
-            else if (horaUm == 0 && horaDois == 0)
-            {
-                periodo.Text = "Manhã";
-            }
-            else if (horaUm == 1 && horaDois == 2)
-            {
-                periodo.Text = "Tarde";
-            }
-        }
-
-        private void imagemPerfil_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog selecionarImagem = new OpenFileDialog();
-            selecionarImagem.Filter = "Imagens Bitmap|*.png;*.jpg;*.bmp;";
-            if (selecionarImagem.ShowDialog() == DialogResult.OK)
-            {
-                Image imagem = Image.FromFile(selecionarImagem.FileName);
-                imagemPerfil.Image = imagem;
-            }
-            else
-            {
-                //O else significa que quando fechar o FileDialog, nada irá ocorrer, apenas irá fechar normalmente.
-            }
-        }
-
-        private void btnEventos_Click(object sender, EventArgs e)
-        {
-            if (tamanho == 1)
-            {
-                this.Size = new Size(785, 434);
-                tamanho += 1;
-            }
-            else
-            {
-                tamanho = 1;
-                this.Size = new Size(637, 434);
-            }
-        }
-        Forms.BattleForm batalha = new Forms.BattleForm();
-        private void btnBatalhar_Click(object sender, EventArgs e)
-        {
-            if (Pet.Estagio.Equals("Bebê"))
-            {
-                MessageBox.Show("O " + Pet.Nome + " não pode batalhar!\nEle está no estágio " + Pet.Estagio + ".");
-            }
-            else
-            {
-                batalha.ShowDialog();
-            }
-        }
         private void btnPetTreinar_Click(object sender, EventArgs e)
         {
             petImagem.Location = new Point(141, 73);
