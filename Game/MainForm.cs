@@ -11,101 +11,6 @@ namespace VirtualTamer
         {
             InitializeComponent();
         }
-        int tempoIdade = 1;
-        int tamanho = 1;
-        int horaUm = 1;
-        int horaDois = 2;
-        int minuto = 0;
-        int segundo = 0;
-        int petMove = 0;
-        Classes.Monstro Pet = new Classes.Monstro();
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            Pet.virarToko();
-        }
-        private void btnPetInfo_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Pet.ToString(), "Informações do PET", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void petAndando_Tick(object sender, EventArgs e)
-        {
-            //Neste método, a imagem do PET irá se mover dentro do panel "tamaArea".
-            petMove++;
-            if (petMove.Equals(80))
-            {
-                petImagem.Location = new Point(141, 73);
-                petMove = 0;
-            }
-            else
-            {
-                if (petMove.Equals(10))
-                {
-                    petImagem.Location = new Point(188, 73);
-                }
-                else if (petMove.Equals(20))
-                {
-                    petImagem.Location = new Point(248, 73);
-                }
-                else if (petMove.Equals(30))
-                {
-                    petImagem.Location = new Point(188, 73);
-                }
-                else if (petMove.Equals(40))
-                {
-                    petImagem.Location = new Point(141, 73);
-                }
-                else if (petMove.Equals(50))
-                {
-                    petImagem.Location = new Point(90, 73);
-                }
-                else if (petMove.Equals(60))
-                {
-                    petImagem.Location = new Point(46, 73);
-                }
-                else if (petMove.Equals(70))
-                {
-                    petImagem.Location = new Point(90, 73);
-                }
-            }
-        }
-        private void btnSair_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        private void tempo_Tick(object sender, EventArgs e)
-        {
-            horario.Text = Convert.ToString(horaUm) + Convert.ToString(horaDois) + ":" + Convert.ToString(minuto) + Convert.ToString(segundo);
-            segundo++;
-            if (horaUm == 2 && horaDois > 3)
-            {
-                horaUm = 0;
-                horaDois = 0;
-                minuto = 0;
-                segundo = 0;
-            }
-            else
-            {
-                if (segundo > 9)
-                {
-                    segundo = 0;
-                    minuto += 1;
-                    if (minuto > 5)
-                    {
-                        minuto = 0;
-                        segundo = 0;
-                        horaDois += 1;
-                        if (horaDois > 9)
-                        {
-                            horaUm += 1;
-                            segundo = 0;
-                            minuto = 0;
-                            horaDois = 0;
-                        }
-                    }
-                }
-            }
-        }
         private void btnPetTreinar_Click(object sender, EventArgs e)
         {
             petImagem.Location = new Point(141, 73);
@@ -129,20 +34,6 @@ namespace VirtualTamer
                 treinando = 0;
                 petAndando.Enabled = true;
                 treinamento.Stop();
-            }
-        }
-        MainForm novodt = new MainForm();
-        private void btnNovoDT_Click(object sender, EventArgs e)
-        {
-            if (novodt.ShowDialog() == DialogResult.OK)
-            {
-                btnNovoDT.Enabled = true;
-            }
-            else
-            {
-                btnNovoDT.Enabled = false;
-                novodt.Show();
-                novodt.btnNovoDT.Enabled = false;
             }
         }
     }
