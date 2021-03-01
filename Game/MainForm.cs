@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
@@ -14,7 +15,9 @@ namespace DT
         int minuto = 0;
         int segundo = 0;
         int petMove = 0;
+        int treinando = 1;
         Monstro Pet = new Monstro();
+        Database db = new Database();
         public MainForm()
         {
             InitializeComponent();
@@ -33,6 +36,13 @@ namespace DT
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            carregar();
+        }
+
+        private void carregar()
+        {
+            txtPerfil.Text = db._Perfil;
+            this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}";
             Pet.virarToko();
         }
 
@@ -154,16 +164,20 @@ namespace DT
                     break;
             }
         }
-        // Não funcional:
-        
-        private void btnPetTreinar_Click(object sender, EventArgs e)
-        {
-            petImagem.Location = new Point(141, 73);
-            petAndando.Enabled = false;
-            treinamento.Enabled = true;
 
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Application.Exit();
         }
-        int treinando;
+
+        private void btnTreinar_Click(object sender, EventArgs e)
+        {
+            petImagem.Location = new Point(128, 59);
+            move.Enabled = false;
+            treinamento.Enabled = true;
+        }
+
         private void treinamento_Tick(object sender, EventArgs e)
         {
             treinando++;
@@ -177,7 +191,7 @@ namespace DT
                 Pet.Vida += 1;
                 System.Threading.Thread.Sleep(250);
                 treinando = 0;
-                petAndando.Enabled = true;
+                move.Enabled = true;
                 treinamento.Stop();
             }
         }
