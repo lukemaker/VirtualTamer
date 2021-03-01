@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Text;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
@@ -8,8 +9,6 @@ namespace DT
 {
     public partial class MainForm : Form
     {
-        int tempoIdade = 1;
-        int tamanho = 1;
         int horaUm = 1;
         int horaDois = 2;
         int minuto = 0;
@@ -53,7 +52,7 @@ namespace DT
 
         private void tempo_Tick(object sender, EventArgs e)
         {
-            horario.Text = Convert.ToString(horaUm) + Convert.ToString(horaDois) + ":" + Convert.ToString(minuto) + Convert.ToString(segundo);
+            hora();
             segundo++;
             if (horaUm == 2 && horaDois > 3)
             {
@@ -194,6 +193,47 @@ namespace DT
                 move.Enabled = true;
                 treinamento.Stop();
             }
+        }
+
+        private void btnVoltar_Click(object sender, EventArgs e)
+        {
+            salvarJanela.Visible = false;
+        }
+
+        private void btnCarregar_Click(object sender, EventArgs e)
+        {
+            salvarJanela.Visible = true;
+            string[] slot1 = File.ReadAllLines(@"C:\info1.dt");
+            txtInfoPet.Text = $"Nome: {slot1[0]}\nEstágio: {slot1[7]}\nIdade: {slot1[2]}\nExp: {slot1[5]}\nForça: {slot1[3]}";
+            txtInfo2Pet.Text = $"Fome: {slot1[4]}\nVida: {slot1[1]}\nVitoria: {slot1[6]}";
+            string[] time1 = File.ReadAllLines(@"C:\save1.dt");
+            txtSaveName.Text = $"Slot 1 - {time1[0]}{time1[1]}:{time1[2]}{time1[3]}";
+            salvarJanela.Dock = DockStyle.Fill;
+        }
+
+        private void btnCarregarJogo_Click(object sender, EventArgs e)
+        {
+            // Slot 1 - Localizado em C:\
+            string[] slot = File.ReadAllLines(@"C:\save1.dt");
+            horaUm = int.Parse(slot[0]);
+            horaDois = int.Parse(slot[1]);
+            minuto = int.Parse(slot[2]);
+            segundo = int.Parse(slot[3]);
+            string[] pet = File.ReadAllLines(@"C:\info1.dt");
+            Pet.Nome = pet[0];
+            Pet.Vida = int.Parse(pet[1]);
+            Pet.Idade = int.Parse(pet[2]);
+            Pet.Força = int.Parse(pet[3]);
+            Pet.Fome = int.Parse(pet[4]);
+            Pet.Exp = int.Parse(pet[5]);
+            Pet.Vitoria = int.Parse(pet[6]);
+            Pet.Estagio = pet[7];
+            salvarJanela.Visible = false;
+            hora();
+        }
+        void hora()
+        {
+            horario.Text = Convert.ToString(horaUm) + Convert.ToString(horaDois) + ":" + Convert.ToString(minuto) + Convert.ToString(segundo);
         }
     }
 }
