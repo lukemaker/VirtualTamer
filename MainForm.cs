@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using System.Globalization;
 using System.Windows.Forms;
@@ -15,6 +15,7 @@ namespace DT
         int segundo = 0;
         int petMove = 0;
         int treinando = 1;
+        int atualizado = 10;
         Monstro Pet = new Monstro();
         Database db = new Database();
         public MainForm()
@@ -185,16 +186,21 @@ namespace DT
                 treinamento.Stop();
             }
         }
-
-        private void btnVoltar_Click(object sender, EventArgs e)
-        {
-            salvarJanela.Visible = false;
-        }
-
         private void btnCarregar_Click(object sender, EventArgs e)
         {
-            salvarJanela.Visible = true;
-            carregarArquivo();
+            if (salvarJanela.Visible == true || salvarJanela.Dock == DockStyle.None)
+            {
+                btnCarregar.Text = "Arquivos";
+                salvarJanela.Visible = false;
+            }
+            else
+            {
+                salvarJanela.Visible = true;
+                salvarJanela.Dock = DockStyle.Fill;
+                btnCarregar.Text = "Voltar";
+                carregarArquivo();
+                carregarArquivoDois();
+            }
         }
 
         private void btnCarregarJogo_Click(object sender, EventArgs e)
@@ -226,22 +232,29 @@ namespace DT
                 txtInfo2Pet.Text = $"Fome: {slot1[4]}\nVida: {slot1[1]}\nVitoria: {slot1[6]}";
                 string[] time1 = File.ReadAllLines(db.slot1local);
                 txtSaveName.Text = $"Slot 1 - {time1[0]}{time1[1]}:{time1[2]}{time1[3]}";
-                salvarJanela.Dock = DockStyle.Fill;
-                if (File.Exists(db.slot2local) && File.Exists(db.info2))
-                {
-                    string[] slot2 = File.ReadAllLines(db.info2);
-                    txtInfo2Pet.Text = $"Nome: {slot2[0]}\nEstágio: {slot2[7]}\nIdade: {slot2[2]}\nExp: {slot2[5]}\nForça: {slot2[3]}";
-                    txtInfo2Pet2.Text = $"Fome: {slot2[4]}\nVida: {slot2[1]}\nVitoria: {slot2[6]}";
-                    string[] time2 = File.ReadAllLines(db.slot2local);
-                    txtSaveName.Text = $"Slot 1 - {time2[0]}{time2[1]}:{time2[2]}{time2[3]}";
-                    salvarJanela.Dock = DockStyle.Fill;
-                }
             }
             else
             {
                 txtSaveName.Text = "Slot 1 vazio";
                 txtInfoPet.Text = "Nenhum arquivo salvo.";
                 txtInfo2Pet.Text = "";
+            }
+        }
+        void carregarArquivoDois()
+        {
+            if (File.Exists(db.slot2local) && File.Exists(db.info2))
+            {
+                string[] slot2 = File.ReadAllLines(db.info2);
+                txtInfoPet2.Text = $"Nome: {slot2[0]}\nEstágio: {slot2[7]}\nIdade: {slot2[2]}\nExp: {slot2[5]}\nForça: {slot2[3]}";
+                txtInfo2Pet2.Text = $"Fome: {slot2[4]}\nVida: {slot2[1]}\nVitoria: {slot2[6]}";
+                string[] time2 = File.ReadAllLines(db.slot2local);
+                txtSaveNameDois.Text = $"Slot 2 - {time2[0]}{time2[1]}:{time2[2]}{time2[3]}";
+            }
+            else
+            {
+                txtSaveNameDois.Text = "Slot 2 vazio";
+                txtInfoPet2.Text = "Nenhum arquivo salvo.";
+                txtInfo2Pet2.Text = "";
             }
         }
         void hora()
@@ -251,7 +264,26 @@ namespace DT
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            carregarArquivo();
+            if (aguarde.Enabled == false)
+            {
+                carregarArquivo();
+                aguarde.Start();
+            }
+        }
+        private void aguarde_Tick(object sender, EventArgs e)
+        {
+            btnAtualizar.Text = $"Aguarde {atualizado}s";
+            atualizado--;
+            if (atualizado == 0)
+            {
+                btnAtualizar.Text = "Atualizar";
+                atualizado = 10;
+                aguarde.Stop();
+            }
+        }
+        private void btnPresente_Click(object sender, EventArgs e)
+        {
+            // Em breve.
         }
     }
 }
