@@ -84,6 +84,11 @@ namespace DT
                 }
             }
         }
+        void hora()
+        {
+            horario.Text = Convert.ToString(horaUm) + Convert.ToString(horaDois) + ":" + Convert.ToString(minuto) + Convert.ToString(segundo);
+        }
+
 
         private void btnSobre_Click(object sender, EventArgs e)
         {
@@ -168,7 +173,14 @@ namespace DT
             move.Enabled = false;
             treinamento.Enabled = true;
         }
-
+        private void btnCarregarJogo_Click(object sender, EventArgs e)
+        {
+            processarArquivo();
+        }
+        private void btnCarregarJogoDois_Click(object sender, EventArgs e)
+        {
+            processarArquivoDois();
+        }
         private void treinamento_Tick(object sender, EventArgs e)
         {
             treinando++;
@@ -202,26 +214,49 @@ namespace DT
                 carregarArquivoDois();
             }
         }
-
-        private void btnCarregarJogo_Click(object sender, EventArgs e)
+        void processarArquivo()
         {
-            // Slot 1 - Localizado em C:\
-            string[] slot = File.ReadAllLines(db.slot1local);
-            horaUm = int.Parse(slot[0]);
-            horaDois = int.Parse(slot[1]);
-            minuto = int.Parse(slot[2]);
-            segundo = int.Parse(slot[3]);
-            string[] pet = File.ReadAllLines(db.info1);
-            Pet.Nome = pet[0];
-            Pet.Vida = int.Parse(pet[1]);
-            Pet.Idade = int.Parse(pet[2]);
-            Pet.Força = int.Parse(pet[3]);
-            Pet.Fome = int.Parse(pet[4]);
-            Pet.Exp = int.Parse(pet[5]);
-            Pet.Vitoria = int.Parse(pet[6]);
-            Pet.Estagio = pet[7];
-            salvarJanela.Visible = false;
-            hora();
+            if (File.Exists(db.slot1local) && File.Exists(db.info1))
+            {
+                string[] slot = File.ReadAllLines(db.slot1local);
+                horaUm = int.Parse(slot[0]);
+                horaDois = int.Parse(slot[1]);
+                minuto = int.Parse(slot[2]);
+                segundo = int.Parse(slot[3]);
+                string[] pet = File.ReadAllLines(db.info1);
+                Pet.Nome = pet[0];
+                Pet.Vida = int.Parse(pet[1]);
+                Pet.Idade = int.Parse(pet[2]);
+                Pet.Força = int.Parse(pet[3]);
+                Pet.Fome = int.Parse(pet[4]);
+                Pet.Exp = int.Parse(pet[5]);
+                Pet.Vitoria = int.Parse(pet[6]);
+                Pet.Estagio = pet[7];
+                salvarJanela.Visible = false;
+                hora();
+            }
+        }
+        void processarArquivoDois()
+        {
+            if (File.Exists(db.slot2local) && File.Exists(db.info2))
+            {
+                string[] slot = File.ReadAllLines(db.slot2local);
+                horaUm = int.Parse(slot[0]);
+                horaDois = int.Parse(slot[1]);
+                minuto = int.Parse(slot[2]);
+                segundo = int.Parse(slot[3]);
+                string[] pet = File.ReadAllLines(db.info2);
+                Pet.Nome = pet[0];
+                Pet.Vida = int.Parse(pet[1]);
+                Pet.Idade = int.Parse(pet[2]);
+                Pet.Força = int.Parse(pet[3]);
+                Pet.Fome = int.Parse(pet[4]);
+                Pet.Exp = int.Parse(pet[5]);
+                Pet.Vitoria = int.Parse(pet[6]);
+                Pet.Estagio = pet[7];
+                salvarJanela.Visible = false;
+                hora();
+            }
         }
         void carregarArquivo()
         {
@@ -257,16 +292,12 @@ namespace DT
                 txtInfo2Pet2.Text = "";
             }
         }
-        void hora()
-        {
-            horario.Text = Convert.ToString(horaUm) + Convert.ToString(horaDois) + ":" + Convert.ToString(minuto) + Convert.ToString(segundo);
-        }
-
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
             if (aguarde.Enabled == false)
             {
                 carregarArquivo();
+                carregarArquivoDois();
                 aguarde.Start();
             }
         }
