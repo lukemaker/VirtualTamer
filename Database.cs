@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace DT
@@ -8,8 +8,8 @@ namespace DT
         public string _Perfil = "user0321";
         public string _NomeDoProduto = "Virtual Tamer";
         public string _NomeDoSalvamento = "user0321";
-        public string _ArquivoDeSalvamento = "Data 1 - ";
-        public float _VersaoDoProduto = 0.43f;
+        public string _EstadoDoProduto = "Alpha";
+        public float _VersaoDoProduto = 0.51f;
         public string slot1local = @"C:\dtame\save1.dt";
         public string slot2local = @"C:\dtame\save2.dt";
         public string info1 = @"C:\dtame\info1.dt";
