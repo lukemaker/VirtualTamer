@@ -42,7 +42,7 @@ namespace DT
         private void carregar()
         {
             txtPerfil.Text = db._Perfil;
-            this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}";
+            this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)} {db._EstadoDoProduto}";
             Pet.virarToko();
         }
 
@@ -235,6 +235,10 @@ namespace DT
                 salvarJanela.Visible = false;
                 hora();
             }
+            else
+            {
+                msgArquivo();
+            }
         }
         void processarArquivoDois()
         {
@@ -256,6 +260,10 @@ namespace DT
                 Pet.Estagio = pet[7];
                 salvarJanela.Visible = false;
                 hora();
+            }
+            else
+            {
+                msgArquivo();
             }
         }
         void carregarArquivo()
@@ -311,6 +319,10 @@ namespace DT
                 atualizado = 10;
                 aguarde.Stop();
             }
+        }
+        void msgArquivo()
+        {
+            MessageBox.Show("Não foi possível localizar o arquivo.", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void btnPresente_Click(object sender, EventArgs e)
         {
