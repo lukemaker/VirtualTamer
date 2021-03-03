@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 namespace DT
@@ -10,10 +10,14 @@ namespace DT
         public int Exp;
         public int Força;
         public int Vitoria;
+        public int Derrota;
         public int Fome;
         public int Vida;
         public int Idade;
-        bool vivo = true;
+        public int Mistake;
+        public int Corrupt;
+
+        public bool vivo = true;
 
         public void checarTudo()
         {
@@ -23,21 +27,27 @@ namespace DT
 
         public void descerFome()
         {
-            if (this.Estagio == "Bebê")
+            switch (Estagio)
             {
-                this.Fome -= 1;
-            }
-            else if (this.Estagio == "Criança")
-            {
-                this.Fome -= 2;
-            }
-            else if (this.Estagio == "Perfeito" || this.Estagio == "Dark")
-            {
-                this.Fome -= 3;
-            }
-            else if (this.Estagio == "Final")
-            {
-                this.Fome -= 4;
+                case "Bebê":
+                    this.Fome -= 1;
+                    break;
+
+                case "Criança":
+                    this.Fome -= 1;
+                    break;
+
+                case "Dark":
+                    this.Fome -= 2;
+                    break;
+
+                case "Mega":
+                    this.Fome -= 3;
+                    break;
+
+                case "Ultimate":
+                    this.Fome -= 3;
+                    break;
             }
         }
         public void subirFome()
@@ -56,7 +66,7 @@ namespace DT
                     this.Fome += 2;
                     break;
 
-                case "Perfeito":
+                case "Mega":
                     this.Fome += 3;
                     break;
 
@@ -89,7 +99,7 @@ namespace DT
                     this.Exp += 2;
                     break;
 
-                case "Perfeito":
+                case "Mega":
                     this.Exp += 3;
                     break;
 
@@ -101,13 +111,17 @@ namespace DT
         //Metódo Evoluir apenas para testes.
         public void evoluir()
         {
-            if (this.Nome == "Toko" && Exp == 5 && Força == 10)
+            if (this.Nome == "Toko" && Exp >= 5 && Força >= 5)
             {
                 virarEvoToko();
             }
-            else if (this.Nome == "EvoToko" && Exp == 10 && Força == 15 && Idade == 5)
+            else if (this.Nome == "EvoToko" && Exp >= 10 && Exp <= 13 && Força >= 7 && Força <= 13)
             {
-                virarUltimateToko();
+                virarMegaToko();
+            }
+            else
+            {
+
             }
         }
         public void checarVivo()
@@ -120,7 +134,7 @@ namespace DT
         }
         public override string ToString()
         {
-            return $"Nome: {Nome}\nEstagio: {Estagio} \nExperiência: {Exp} \nForça: {Força}\nVida: {Vida} \nIdade: {Idade} \nFome: {Fome}";
+            return $"Nome: {Nome}\nEstagio: {Estagio} \nExperiência: {Exp} \nForça: {Força}\nVida: {Vida} \nIdade: {Idade} \nFome: {Fome} \nMistakes: {Mistake}";
         }
 
         public void mensagemTreinar()
@@ -151,11 +165,11 @@ namespace DT
             Idade = 5;
             Vida = 25;
         }
-        public void virarUltimateToko()
+        public void virarMegaToko()
         {
             //Requer idade 10 / Peso 2.50 ou superior / Vitória maior que 15 / Dano 15
-            Nome = "UltimateToko";
-            Estagio = "Ultimate";
+            Nome = "MegaToko";
+            Estagio = "Mega";
             Vitoria = 15;
             Força = 15;
             Fome = 10;
