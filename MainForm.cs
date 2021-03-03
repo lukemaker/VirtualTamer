@@ -52,34 +52,41 @@ namespace DT
 
         private void tempo_Tick(object sender, EventArgs e)
         {
-            hora();
-            segundo++;
-            if (horaUm == 2 && horaDois > 3)
+            if (Pet.vivo == true)
             {
-                Pet.Dias += 1;
-                Pet.checarDias(); // Método que irá checar os dias para evoluir o pet.
-                horaUm = 0;
-                horaDois = 0;
-                minuto = 0;
-                segundo = 0;
-            }
-            else
-            {
-                if (segundo > 9)
+                hora();
+                segundo++;
+                if (horaUm == 2 && horaDois > 3)
                 {
+                    Pet.Dias += 1;
+                    Pet.checarDias(); // Método que irá checar os dias para evoluir o pet.
+                    horaUm = 0;
+                    horaDois = 0;
+                    minuto = 0;
                     segundo = 0;
-                    minuto += 1;
-                    if (minuto > 5)
+                    if (Pet.vivo == false)
                     {
-                        minuto = 0;
+                        MessageBox.Show("Seu pet morreu...", "...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    if (segundo > 9)
+                    {
                         segundo = 0;
-                        horaDois += 1;
-                        if (horaDois > 9)
+                        minuto += 1;
+                        if (minuto > 5)
                         {
-                            horaUm += 1;
-                            segundo = 0;
                             minuto = 0;
-                            horaDois = 0;
+                            segundo = 0;
+                            horaDois += 1;
+                            if (horaDois > 9)
+                            {
+                                horaUm += 1;
+                                segundo = 0;
+                                minuto = 0;
+                                horaDois = 0;
+                            }
                         }
                     }
                 }
