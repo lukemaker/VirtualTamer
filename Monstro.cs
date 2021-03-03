@@ -23,7 +23,6 @@ namespace DT
         public void checarTudo()
         {
             checarSaude();
-            checarVivo();
         }
 
         public void descerFome()
@@ -109,14 +108,6 @@ namespace DT
                     break;
             }
         }
-        public void checarVivo()
-        {
-            if (this.vivo == false)
-            {
-                MessageBox.Show("Seu PET morreu!");
-                Application.Exit();
-            }
-        }
         public override string ToString()
         {
             return $"Nome: {Nome}\nEstagio: {Estagio} \nExperiência: {Exp} \nForça: {Força}\nVida: {Vida} \nIdade: {Idade} \nFome: {Fome} \nMistakes: {Mistake} \nDias: {Dias}";
@@ -161,6 +152,18 @@ namespace DT
         public void morrer()
         {
             vivo = false;
+            Nome = "Pet inexistente.";
+            Estagio = "?";
+            Dias = 0;
+            Exp = 0;
+            Força = 0;
+            Vitoria = 0;
+            Derrota = 0;
+            Fome = 0;
+            Vida = 0;
+            Idade = 0;
+            Mistake = 0;
+            Corrupt = 0;
         }
 
         // Metódo Evoluir em desenvolvimento
@@ -188,22 +191,22 @@ namespace DT
         {
             switch (Dias)
             {
-                case 1:
+                case 2:
                     evoluir();
                     break;
-                case 3:
-                    evoluir();
-                    break;
-
                 case 5:
                     evoluir();
                     break;
-
                 case 8:
                     evoluir();
                     break;
-
-                case 14:
+                case 13:
+                    evoluir();
+                    break;
+                case 16:
+                    evoluir();
+                    break;
+                case 20:
                     evoluir();
                     break;
             }
