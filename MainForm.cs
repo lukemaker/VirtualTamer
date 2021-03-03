@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
@@ -42,7 +41,7 @@ namespace DT
         private void carregar()
         {
             txtPerfil.Text = db._Perfil;
-            this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)} {db._EstadoDoProduto}";
+            //this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}";
             Pet.virarToko();
         }
 
@@ -200,7 +199,7 @@ namespace DT
         }
         private void btnCarregar_Click(object sender, EventArgs e)
         {
-            if (salvarJanela.Visible == true || salvarJanela.Dock == DockStyle.None)
+            if (btnCarregar.Text == "Voltar")
             {
                 btnCarregar.Text = "Arquivos";
                 salvarJanela.Visible = false;
@@ -232,6 +231,9 @@ namespace DT
                 Pet.Exp = int.Parse(pet[5]);
                 Pet.Vitoria = int.Parse(pet[6]);
                 Pet.Estagio = pet[7];
+                Pet.Derrota = int.Parse(pet[8]);
+                Pet.Mistake = int.Parse(pet[9]);
+                Pet.vivo = bool.Parse(pet[10]);
                 salvarJanela.Visible = false;
                 hora();
             }
@@ -258,6 +260,9 @@ namespace DT
                 Pet.Exp = int.Parse(pet[5]);
                 Pet.Vitoria = int.Parse(pet[6]);
                 Pet.Estagio = pet[7];
+                Pet.Derrota = int.Parse(pet[8]);
+                Pet.Mistake = int.Parse(pet[9]);
+                Pet.vivo = bool.Parse(pet[10]);
                 salvarJanela.Visible = false;
                 hora();
             }
@@ -272,7 +277,7 @@ namespace DT
             {
                 string[] slot1 = File.ReadAllLines(db.info1);
                 txtInfoPet.Text = $"Nome: {slot1[0]}\nEstágio: {slot1[7]}\nIdade: {slot1[2]}\nExp: {slot1[5]}\nForça: {slot1[3]}";
-                txtInfo2Pet.Text = $"Fome: {slot1[4]}\nVida: {slot1[1]}\nVitoria: {slot1[6]}";
+                txtInfo2Pet.Text = $"Fome: {slot1[4]}\nVida: {slot1[1]}\nVitoria: {slot1[6]}\nDerrotas: {slot1[8]}";
                 string[] time1 = File.ReadAllLines(db.slot1local);
                 txtSaveName.Text = $"Slot 1 - {time1[0]}{time1[1]}:{time1[2]}{time1[3]}";
             }
@@ -289,7 +294,7 @@ namespace DT
             {
                 string[] slot2 = File.ReadAllLines(db.info2);
                 txtInfoPet2.Text = $"Nome: {slot2[0]}\nEstágio: {slot2[7]}\nIdade: {slot2[2]}\nExp: {slot2[5]}\nForça: {slot2[3]}";
-                txtInfo2Pet2.Text = $"Fome: {slot2[4]}\nVida: {slot2[1]}\nVitoria: {slot2[6]}";
+                txtInfo2Pet2.Text = $"Fome: {slot2[4]}\nVida: {slot2[1]}\nVitoria: {slot2[6]}\nDerrotas: {slot2[8]}";
                 string[] time2 = File.ReadAllLines(db.slot2local);
                 txtSaveNameDois.Text = $"Slot 2 - {time2[0]}{time2[1]}:{time2[2]}{time2[3]}";
             }
@@ -304,6 +309,7 @@ namespace DT
         {
             if (aguarde.Enabled == false)
             {
+                btnAtualizar.Text = "Atualizando...";
                 carregarArquivo();
                 carregarArquivoDois();
                 aguarde.Start();
@@ -327,6 +333,20 @@ namespace DT
         private void btnPresente_Click(object sender, EventArgs e)
         {
             // Em breve.
+        }
+
+        private void btnDeletarJogo_Click(object sender, EventArgs e)
+        {
+            DeleteFile df = new DeleteFile();
+            df.Text = "Deletar arquivo - slot 1";
+            df.ShowDialog();
+        }
+
+        private void btnDeletarJogoDois_Click(object sender, EventArgs e)
+        {
+            DeleteFile df = new DeleteFile();
+            df.Text = "Deletar arquivo - slot 2";
+            df.ShowDialog();
         }
     }
 }
