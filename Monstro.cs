@@ -108,22 +108,6 @@ namespace DT
                     break;
             }
         }
-        //Metódo Evoluir apenas para testes.
-        public void evoluir()
-        {
-            if (this.Nome == "Toko" && Exp >= 5 && Força >= 5)
-            {
-                virarEvoToko();
-            }
-            else if (this.Nome == "EvoToko" && Exp >= 10 && Exp <= 13 && Força >= 7 && Força <= 13)
-            {
-                virarMegaToko();
-            }
-            else
-            {
-
-            }
-        }
         public void checarVivo()
         {
             if (this.vivo == false)
@@ -149,32 +133,54 @@ namespace DT
             Nome = "Toko";
             Estagio = "Criança";
             Vitoria = 0;
-            Força = 1;
-            Vida = 10;
-            Fome = 10;
+            Força = 0;
+            Vida = 3;
+            Fome = 3;
             Idade = 1;
         }
         public void virarEvoToko()
         {
-            //Requer idade 5 / Dano 7
             Nome = "EvoToko";
             Estagio = "Criança";
-            Vitoria = 0;
-            Força = 10;
-            Fome = 10;
-            Idade = 5;
-            Vida = 25;
+            ganharExp();
         }
         public void virarMegaToko()
         {
-            //Requer idade 10 / Peso 2.50 ou superior / Vitória maior que 15 / Dano 15
             Nome = "MegaToko";
             Estagio = "Mega";
-            Vitoria = 15;
-            Força = 15;
-            Fome = 10;
-            Idade = 10;
-            Vida = 50;
+            ganharExp();
+        }
+        public void virarShinka()
+        {
+            Nome = "Shinka";
+            Estagio = "mega";
+            ganharExp();
+        }
+        public void morrer()
+        {
+            vivo = false;
+        }
+
+        // Metódo Evoluir em desenvolvimento
+
+        public void evoluir()
+        {
+            if (this.Nome == "Toko" && Exp >= 5 && Força >= 5)
+            {
+                virarEvoToko();
+            }
+            else if (this.Nome == "EvoToko" && Exp >= 10 && Exp <= 13 && Força >= 7 && Força <= 13)
+            {
+                virarMegaToko();
+            }
+            else if (this.Nome == "EvoToko" && Exp <= 10 && Exp >= 8 && Força >= 13 && Força <= 15)
+            {
+                virarShinka();
+            }
+            else
+            {
+                morrer();
+            }
         }
     }
 }
