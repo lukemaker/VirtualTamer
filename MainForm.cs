@@ -41,7 +41,7 @@ namespace DT
         private void carregar()
         {
             txtPerfil.Text = db._Perfil;
-            //this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}";
+            this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}";
             Pet.virarToko();
         }
 
