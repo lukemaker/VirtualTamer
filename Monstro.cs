@@ -7,6 +7,7 @@ namespace DT
     {
         public string Nome;
         public string Estagio;
+        public int Dias;
         public int Exp;
         public int Força;
         public int Vitoria;
@@ -118,7 +119,7 @@ namespace DT
         }
         public override string ToString()
         {
-            return $"Nome: {Nome}\nEstagio: {Estagio} \nExperiência: {Exp} \nForça: {Força}\nVida: {Vida} \nIdade: {Idade} \nFome: {Fome} \nMistakes: {Mistake}";
+            return $"Nome: {Nome}\nEstagio: {Estagio} \nExperiência: {Exp} \nForça: {Força}\nVida: {Vida} \nIdade: {Idade} \nFome: {Fome} \nMistakes: {Mistake} \nDias: {Dias}";
         }
 
         public void mensagemTreinar()
@@ -133,7 +134,8 @@ namespace DT
             Nome = "Toko";
             Estagio = "Criança";
             Vitoria = 0;
-            Força = 0;
+            Força = 5;
+            Exp = 5;
             Vida = 3;
             Fome = 3;
             Idade = 1;
@@ -180,6 +182,30 @@ namespace DT
             else
             {
                 morrer();
+            }
+        }
+        public void checarDias()
+        {
+            switch (Dias)
+            {
+                case 1:
+                    evoluir();
+                    break;
+                case 3:
+                    evoluir();
+                    break;
+
+                case 5:
+                    evoluir();
+                    break;
+
+                case 8:
+                    evoluir();
+                    break;
+
+                case 14:
+                    evoluir();
+                    break;
             }
         }
     }
