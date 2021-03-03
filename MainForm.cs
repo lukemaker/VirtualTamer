@@ -56,6 +56,8 @@ namespace DT
             segundo++;
             if (horaUm == 2 && horaDois > 3)
             {
+                Pet.Dias += 1;
+                Pet.checarDias(); // Método que irá checar os dias para evoluir o pet.
                 horaUm = 0;
                 horaDois = 0;
                 minuto = 0;
@@ -100,38 +102,38 @@ namespace DT
             petMove++;
             if (petMove.Equals(80))
             {
-                petImagem.Location = new Point(128, 59);
+                petImagem.Location = new Point(128, 80);
                 petMove = 0;
             }
             else
             {
                 if (petMove.Equals(10))
                 {
-                    petImagem.Location = new Point(155, 59);
+                    petImagem.Location = new Point(155, 80);
                 }
                 else if (petMove.Equals(20))
                 {
-                    petImagem.Location = new Point(190, 59);
+                    petImagem.Location = new Point(190, 80);
                 }
                 else if (petMove.Equals(30))
                 {
-                    petImagem.Location = new Point(155, 59);
+                    petImagem.Location = new Point(155, 80);
                 }
                 else if (petMove.Equals(40))
                 {
-                    petImagem.Location = new Point(128, 59);
+                    petImagem.Location = new Point(128, 80);
                 }
                 else if (petMove.Equals(50))
                 {
-                    petImagem.Location = new Point(95, 59);
+                    petImagem.Location = new Point(95, 80);
                 }
                 else if (petMove.Equals(60))
                 {
-                    petImagem.Location = new Point(60, 59);
+                    petImagem.Location = new Point(60, 80);
                 }
                 else if (petMove.Equals(70))
                 {
-                    petImagem.Location = new Point(95, 59);
+                    petImagem.Location = new Point(95, 80);
                 }
             }
         }
