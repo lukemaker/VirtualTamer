@@ -117,6 +117,31 @@ namespace DT
         {
             MessageBox.Show($"Seu pet acabou de treinar!", "Informações do Treino");
         }
+        public void resetPetInfo()
+        {
+            Vitoria = 0;
+            Força = 0;
+            Exp = 0;
+            Vida = 0;
+            Fome = 0;
+            Idade = 0;
+            Dias = 0;
+            Mistake = 0;
+            Corrupt = 0;
+        }
+
+        // Ovos:
+
+        public void eggInicialCasual()
+        {
+            Nome = "Ovo Casual";
+            Estagio = "Ovo";
+        }
+        public void eggInicialEscuro()
+        {
+            Nome = "Ovo Escuro";
+            Estagio = "Ovo";
+        }
 
         //Pets:
 
