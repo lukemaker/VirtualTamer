@@ -15,6 +15,7 @@ namespace DT
         int petMove = 0;
         int treinando = 1;
         int atualizado = 10;
+        bool centro = false;
         Monstro Pet = new Monstro();
         Database db = new Database();
         public MainForm()
@@ -41,8 +42,35 @@ namespace DT
         private void carregar()
         {
             txtPerfil.Text = db._Perfil;
-            this.Text = $"{db._NomeDoProduto} {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}";
+            this.Text = $"{db._NomeDoProduto}";
+            // {Convert.ToString(db._VersaoDoProduto, CultureInfo.InvariantCulture)}
             Pet.virarToko();
+            if (File.Exists(db.info1) && File.Exists(db.slot1local))
+            {
+                string[] slot = File.ReadAllLines(db.slot1local);
+                horaUm = int.Parse(slot[0]);
+                horaDois = int.Parse(slot[1]);
+                minuto = int.Parse(slot[2]);
+                segundo = int.Parse(slot[3]);
+                string[] pet = File.ReadAllLines(db.info1);
+                Pet.Nome = pet[0];
+                Pet.Vida = int.Parse(pet[1]);
+                Pet.Idade = int.Parse(pet[2]);
+                Pet.Força = int.Parse(pet[3]);
+                Pet.Fome = int.Parse(pet[4]);
+                Pet.Exp = int.Parse(pet[5]);
+                Pet.Vitoria = int.Parse(pet[6]);
+                Pet.Estagio = pet[7];
+                Pet.Derrota = int.Parse(pet[8]);
+                Pet.Mistake = int.Parse(pet[9]);
+                Pet.vivo = bool.Parse(pet[10]);
+                salvarJanela.Visible = false;
+                hora();
+            }
+            else
+            {
+                
+            }
         }
 
         private void btnInfo_Click(object sender, EventArgs e)
@@ -356,6 +384,35 @@ namespace DT
             DeleteFile df = new DeleteFile();
             df.Text = "Deletar arquivo - slot 2";
             df.ShowDialog();
+        }
+
+        private void btnDireita_Click(object sender, EventArgs e)
+        {
+            dirEsq();
+        }
+
+        private void btnEsquerda_Click(object sender, EventArgs e)
+        {
+            dirEsq();
+        }
+        void dirEsq()
+        {
+            switch (centro)
+            {
+                case false:
+                    eggImagem.Image = Properties.Resources.eggDark;
+                    centro = true;
+                    break;
+                case true:
+                    eggImagem.Image = Properties.Resources.eggCasual;
+                    centro = false;
+                    break;
+            }
+        }
+
+        private void btnIniciarJogo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
