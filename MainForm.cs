@@ -15,6 +15,7 @@ namespace DT
         int petMove = 0;
         int treinando = 1;
         int atualizado = 10;
+        bool mover = false;
         bool centro = false;
         Monstro Pet = new Monstro();
         Database db = new Database();
@@ -36,6 +37,8 @@ namespace DT
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            janelaInicial.Visible = true;
+            janelaInicial.Dock = DockStyle.Fill;
             carregar();
         }
 
@@ -86,6 +89,7 @@ namespace DT
                 segundo++;
                 if (horaUm == 2 && horaDois > 3)
                 {
+                    checarPeriodo();
                     Pet.Dias += 1;
                     Pet.checarDias(); // Método que irá checar os dias para evoluir o pet.
                     horaUm = 0;
@@ -101,15 +105,18 @@ namespace DT
                 {
                     if (segundo > 9)
                     {
+                        checarPeriodo();
                         segundo = 0;
                         minuto += 1;
                         if (minuto > 5)
                         {
+                            checarPeriodo();
                             minuto = 0;
                             segundo = 0;
                             horaDois += 1;
                             if (horaDois > 9)
                             {
+                                checarPeriodo();
                                 horaUm += 1;
                                 segundo = 0;
                                 minuto = 0;
@@ -118,6 +125,21 @@ namespace DT
                         }
                     }
                 }
+            }
+        }
+        public void checarPeriodo()
+        {
+            if (horaUm == 1 && horaDois == 2)
+            {
+                txtInfoDia.Text = "Tarde";
+            }
+            else if (horaUm == 1 && horaDois == 8)
+            {
+                txtInfoDia.Text = "Noite";
+            }
+            else if (horaUm == 0 && horaDois == 0)
+            {
+                txtInfoDia.Text = "Manhã";
             }
         }
         void hora()
@@ -134,41 +156,48 @@ namespace DT
 
         private void move_Tick(object sender, EventArgs e)
         {
-            petMove++;
-            if (petMove.Equals(80))
+            if (mover == false)
             {
-                petImagem.Location = new Point(128, 80);
-                petMove = 0;
+
             }
             else
             {
-                if (petMove.Equals(10))
-                {
-                    petImagem.Location = new Point(155, 80);
-                }
-                else if (petMove.Equals(20))
-                {
-                    petImagem.Location = new Point(190, 80);
-                }
-                else if (petMove.Equals(30))
-                {
-                    petImagem.Location = new Point(155, 80);
-                }
-                else if (petMove.Equals(40))
+                petMove++;
+                if (petMove.Equals(80))
                 {
                     petImagem.Location = new Point(128, 80);
+                    petMove = 0;
                 }
-                else if (petMove.Equals(50))
+                else
                 {
-                    petImagem.Location = new Point(95, 80);
-                }
-                else if (petMove.Equals(60))
-                {
-                    petImagem.Location = new Point(60, 80);
-                }
-                else if (petMove.Equals(70))
-                {
-                    petImagem.Location = new Point(95, 80);
+                    if (petMove.Equals(10))
+                    {
+                        petImagem.Location = new Point(155, 80);
+                    }
+                    else if (petMove.Equals(20))
+                    {
+                        petImagem.Location = new Point(190, 80);
+                    }
+                    else if (petMove.Equals(30))
+                    {
+                        petImagem.Location = new Point(155, 80);
+                    }
+                    else if (petMove.Equals(40))
+                    {
+                        petImagem.Location = new Point(128, 80);
+                    }
+                    else if (petMove.Equals(50))
+                    {
+                        petImagem.Location = new Point(95, 80);
+                    }
+                    else if (petMove.Equals(60))
+                    {
+                        petImagem.Location = new Point(60, 80);
+                    }
+                    else if (petMove.Equals(70))
+                    {
+                        petImagem.Location = new Point(95, 80);
+                    }
                 }
             }
         }
@@ -400,11 +429,11 @@ namespace DT
             switch (centro)
             {
                 case false:
-                    eggImagem.Image = Properties.Resources.eggDark;
+                    eggImagem.Image = db.eggDark;
                     centro = true;
                     break;
                 case true:
-                    eggImagem.Image = Properties.Resources.eggCasual;
+                    eggImagem.Image = db.eggCasual;
                     centro = false;
                     break;
             }
@@ -412,7 +441,18 @@ namespace DT
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
-
+            if (centro == false)
+            {
+                petImagem.Image = db.eggCasual;
+                Pet.eggInicialCasual();
+                janelaInicial.Visible = false;
+            }
+            else
+            {
+                petImagem.Image = db.eggCasual;
+                Pet.eggInicialEscuro();
+                janelaInicial.Visible = false;
+            }
         }
     }
 }
