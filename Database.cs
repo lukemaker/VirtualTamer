@@ -12,8 +12,10 @@ namespace DT
         public string slot2local = @"C:\dtame\save2.dt";
         public string info1 = @"C:\dtame\info1.dt";
         public string info2 = @"C:\dtame\info2.dt";
-        Image eggCasual = Properties.Resources.eggCasualAnimation;
-        Image eggDark = Properties.Resources.eggDarkAnimation;
-        Image petToko = Properties.Resources.babytoko;
+        public Image rip = Properties.Resources.ofcRip;
+        public Image carne = Properties.Resources.alimento;
+        public Image eggCasual = Properties.Resources.eggCasualAnimation;
+        public Image eggDark = Properties.Resources.eggDarkAnimation;
+        public Image petToko = Properties.Resources.babytoko;
     }
 }
