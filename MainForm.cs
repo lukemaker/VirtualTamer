@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Windows.Forms;
 using System.Drawing;
 using System.IO;
@@ -15,6 +14,7 @@ namespace DT
         int petMove = 0;
         int treinando = 1;
         int atualizado = 10;
+        int comer = 0;
         bool mover = false;
         bool centro = false;
         Monstro Pet = new Monstro();
@@ -72,7 +72,7 @@ namespace DT
             }
             else
             {
-                
+
             }
         }
 
@@ -96,9 +96,13 @@ namespace DT
                     horaDois = 0;
                     minuto = 0;
                     segundo = 0;
+                    petImagem.Image = Pet.pet;
+                    mover = true;
+                    petImagem.Size = new Size(100, 95);
+                    centralizar();
                     if (Pet.vivo == false)
                     {
-                        MessageBox.Show("Seu pet morreu...", "...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        mover = false;
                     }
                 }
                 else
@@ -126,6 +130,11 @@ namespace DT
                     }
                 }
             }
+        }
+        void centralizar()
+        {
+            petMove = 0;
+            petImagem.Location = new Point(149, 63);
         }
         public void checarPeriodo()
         {
@@ -165,38 +174,38 @@ namespace DT
                 petMove++;
                 if (petMove.Equals(80))
                 {
-                    petImagem.Location = new Point(128, 80);
+                    centralizar();
                     petMove = 0;
                 }
                 else
                 {
                     if (petMove.Equals(10))
                     {
-                        petImagem.Location = new Point(155, 80);
+                        petImagem.Location = new Point(180, 63);
                     }
                     else if (petMove.Equals(20))
                     {
-                        petImagem.Location = new Point(190, 80);
+                        petImagem.Location = new Point(220, 63);
                     }
                     else if (petMove.Equals(30))
                     {
-                        petImagem.Location = new Point(155, 80);
+                        petImagem.Location = new Point(177, 63);
                     }
                     else if (petMove.Equals(40))
                     {
-                        petImagem.Location = new Point(128, 80);
+                        petImagem.Location = new Point(125, 63);
                     }
                     else if (petMove.Equals(50))
                     {
-                        petImagem.Location = new Point(95, 80);
+                        petImagem.Location = new Point(73, 63);
                     }
                     else if (petMove.Equals(60))
                     {
-                        petImagem.Location = new Point(60, 80);
+                        petImagem.Location = new Point(28, 63);
                     }
                     else if (petMove.Equals(70))
                     {
-                        petImagem.Location = new Point(95, 80);
+                        petImagem.Location = new Point(81, 63);
                     }
                 }
             }
@@ -443,6 +452,10 @@ namespace DT
         {
             if (centro == false)
             {
+                horaUm = 1;
+                horaDois = 2;
+                minuto = 0;
+                segundo = 0;
                 petImagem.Image = db.eggCasual;
                 Pet.eggInicialCasual();
                 janelaInicial.Visible = false;
@@ -453,6 +466,34 @@ namespace DT
                 Pet.eggInicialEscuro();
                 janelaInicial.Visible = false;
             }
+        }
+
+        private void comendo_Tick(object sender, EventArgs e)
+        {
+            comer++;
+            comida.Visible = true;
+            if (comer == 5)
+            {
+                comida.Visible = false;
+                if (Pet.Fome == 0)
+                {
+                    comendo.Stop();
+                }
+                else
+                {
+                    Pet.Fome -= 1;
+                    comendo.Stop();
+                    move.Start();
+                }
+            }
+        }
+
+        private void btnAlimentar_Click(object sender, EventArgs e)
+        {
+            centralizar();
+            move.Stop();
+            comendo.Start();
+            comida.Image = db.carne;
         }
     }
 }
